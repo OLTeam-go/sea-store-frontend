@@ -1,0 +1,13 @@
+.ant-form-item-label {
+    text-align: left;
+}
+
+.ant-form {
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .ant-form {
+        max-width: 90%;
+    }
+}
