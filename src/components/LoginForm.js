@@ -1,9 +1,12 @@
 import React, { Component } from "react"
-import { Form, Input, Button, Select } from "antd"
+import { Form, Input, Button, Spin, notification } from "antd"
+import PropTypes from "prop-types"
+import { withRouter } from "react-router"
 
+import AuthApi from "../apis/AuthApi"
+import AuthSession from "../services/AuthSession"
 import "./styles/login_register_form.css"
 
-const { Option } = Select
 const layout = {
     labelCol: {
         span: 8,
@@ -13,20 +16,36 @@ const layout = {
     }
 }
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
+    static propTypes = {
+        history: PropTypes.object.isRequired
+    }
+
     constructor(props) {
         super(props)
         this.state = {
-            isLoggingAsAdmin: false
+            isLoading: false
         }
     }
 
-    handleUserTypeChange(value) {
-        if (value === "admin") this.setState({
-            isLoggingAsAdmin: true
-        }) 
-        else this.setState({
-            isLoggingAsAdmin: false
+    handleLoginRequest(value) {
+        this.setState({ isLoading: true })
+        AuthApi.handleLogin({
+            username: value.username,
+            password: value.password
+        }).then(res => {
+            this.setState({ isLoading: false })
+            const { type, username, id } = res.data
+            AuthSession.handleLoginSucceeded({ type, username, id })
+            this.props.history.push(`/${type}/home`)
+        }).catch(err => {
+            this.setState({ isLoading: false })
+            notification.error({
+                message: "Error logging in",
+                description: "There was an error in logging in",
+                duration: 2.5
+            })
+            console.log(err)
         })
     }
 
@@ -35,7 +54,7 @@ export default class LoginForm extends Component {
             <Form 
                 {...layout}
                 className={this.props.className}
-                onFinish={this.props.onFinish}
+                onFinish={(value) => this.handleLoginRequest(value)}
             >
                 <h1>Login</h1>
 
@@ -53,27 +72,6 @@ export default class LoginForm extends Component {
                 </Form.Item>
 
                 <Form.Item
-                    label="User Type"
-                    name="userType"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please choose your user type"
-                        }
-                    ]}
-                >
-                    <Select
-                        placeholder="Select your user type"
-                        onChange={(value) => this.handleUserTypeChange(value)}
-                        allowClear
-                    >
-                        <Option value="admin">Admin</Option>
-                        <Option value="merchant">Merchant</Option>
-                        <Option value="customer">Customer</Option>
-                    </Select>
-                </Form.Item>
-
-                <Form.Item
                     label="Password"
                     name="password"
                     rules={[
@@ -86,30 +84,24 @@ export default class LoginForm extends Component {
                     <Input.Password />
                 </Form.Item>
 
-                <Form.Item
-                    label="Token"
-                    name="token"
-                    rules={[
-                        {
-                            required: this.state.isLoggingAsAdmin,
-                            message: "Please insert your admin token"
-                        }
-                    ]}
-                    className={this.state.isLoggingAsAdmin ? "" : "hide"}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item>
-                    <Button 
-                        type="primary"
-                        htmlType="submit"
-                        className="login-form__submit"
-                    >
-                        Login
-                    </Button>
-                </Form.Item>
+                {
+                    this.state.isLoading
+                        ? <Spin />
+                        : (
+                            <Form.Item>
+                            <Button 
+                                    type="primary"
+                                    htmlType="submit"
+                                    className="form__submit"
+                                >
+                                    Login
+                                </Button>
+                            </Form.Item>
+                        )
+                }
             </Form>
         )
     }
 }
+
+export default withRouter(LoginForm)

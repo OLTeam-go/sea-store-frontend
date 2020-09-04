@@ -1,8 +1,7 @@
 import React, { Component } from "react"
 import { Layout } from "antd"
-import { withRouter } from "react-router-dom"
 
-import HeaderComponent from "../components/HeaderComponent"
+import HeaderComponent from "../../components/customer/HeaderComponent"
 import "./styles/order_page.css"
 
 const { Content } = Layout
@@ -66,4 +65,4 @@ class OrderPage extends Component {
     }
 }
 
-export default withRouter(OrderPage)
+export default OrderPage

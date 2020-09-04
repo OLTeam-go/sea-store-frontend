@@ -1,9 +1,8 @@
 import React, { Component } from "react"
-import { Layout } from "antd"
-import { withRouter } from "react-router-dom"
+import { Layout, notification } from "antd"
 
-import ProductList from "../components/ProductList"
-import HeaderComponent from "../components/HeaderComponent"
+import ProductList from "../../components/ProductList"
+import HeaderComponent from "../../components/customer/HeaderComponent"
 import "./styles/home_page.css"
 
 const { Content } = Layout
@@ -11,32 +10,27 @@ const { Content } = Layout
 class HomePage extends Component {
     constructor(props) {
         super(props)
-        console.log(this.props)
         this.state = {
-            products: [
-                {
-                    id: "1",
-                    name: "Product 1",
-                    price: "1000",
-                    merchantName: "Merchant 1",
-                    quantity: 2
-                },
-                {
-                    id: "2",
-                    name: "Product 2",
-                    price: "2000",
-                    merchantName: "Merchant 2",
-                    quantity: 1
-                }
-            ]
+            products: []
         }
     }
+
+    componentDidMount() {
+
+    }
+
+    
 
     handleAddToCart(productId) {
         console.log(`Add to cart called ${productId}`)
         let newProductsState = this.state.products.slice()
         newProductsState.find(product => product.id === productId).quantity -= 1
         this.setState(newProductsState)
+        notification.success({
+            message: `Product has been added to cart`,
+            description: "Product add to cart succeeded",
+            duration: 1.5
+        })
     }
 
     render() {
@@ -56,4 +50,4 @@ class HomePage extends Component {
     }
 }
 
-export default withRouter(HomePage)
+export default HomePage

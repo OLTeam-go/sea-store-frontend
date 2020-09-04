@@ -6,6 +6,10 @@
     margin: 0 auto;
 }
 
+.ant-spin {
+    width: 100%;
+}
+
 @media only screen and (max-width: 600px) {
     .ant-form {
         max-width: 90%;

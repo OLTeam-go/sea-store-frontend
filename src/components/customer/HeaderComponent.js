@@ -14,22 +14,22 @@ class HeaderComponent extends Component {
 
     handleHomeMenuClick() {
         console.log("Home menu clicked")
-        this.props.history.push("/home")
+        this.props.history.push("/customer/home")
     }
 
     handleProfileMenuClick() {
         console.log("Profile menu clicked")
-        this.props.history.push("/profile")
+        this.props.history.push("/customer/profile")
     }
 
     handleOrderMenuClick() {
         console.log("Order menu clicked")
-        this.props.history.push("/order")
+        this.props.history.push("/customer/order")
     }
 
     handleCartMenuClick() {
         console.log("Cart menu clicked")
-        this.props.history.push("/cart")
+        this.props.history.push("/customer/cart")
     }
 
     render() {

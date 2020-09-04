@@ -1,6 +1,10 @@
 import React, { Component } from "react"
-import { Form, Input, Button, Select, Radio } from "antd"
+import { Form, Input, Button, Select, Radio, Spin, notification } from "antd"
+import PropTypes from "prop-types"
+import { withRouter } from "react-router"
 
+import AuthApi from "../apis/AuthApi"
+import AuthSession from "../services/AuthSession"
 import "./styles/login_register_form.css"
 
 const { Option } = Select
@@ -13,16 +17,40 @@ const layout = {
     }
 }
 
-export default class RegisterForm extends Component {
+class RegisterForm extends Component {
+    static propTypes = {
+        history: PropTypes.object.isRequired
+    }
+
     constructor(props) {
         super(props)
         this.state = {
-            isLoggingAsAdmin: false
+            isLoggingAsAdmin: false,
+            isLoading: false
         }
     }
 
+    handleRegisterRequest(value) {
+        this.setState({ isLoading: true })
+        AuthApi.handleRegistration(value)
+            .then(res => {
+                this.setState({ isLoading: false })
+                // Get data from db later for the userType and username
+                const { type, username, id } = res.data
+                AuthSession.handleLoginSucceeded({ type, username, id })
+                this.props.history.push(`/${type}/home`)
+            }).catch(err => {
+                this.setState({ isLoading: false })
+                notification.error({
+                    message: "Error registering",
+                    description: "There was an error in registering",
+                    duration: 2.5
+                })
+                console.error(err)
+            })
+    }
+
     handleUserTypeChange(value) {
-        console.log(value)
         if (value === "admin") this.setState({
             isLoggingAsAdmin: true
         }) 
@@ -35,7 +63,9 @@ export default class RegisterForm extends Component {
         return (
             <Form 
                 {...layout}
-                className={this.props.className}>
+                className={this.props.className}
+                onFinish={(value) => this.handleRegisterRequest(value)}
+            >
                 <h1>Register</h1>
 
                 <Form.Item
@@ -49,6 +79,20 @@ export default class RegisterForm extends Component {
                     ]}
                 >
                     <Input />    
+                </Form.Item>
+
+                <Form.Item
+                    label="Email"
+                    name="email"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please input your correct email",
+                            type: "email"
+                        }
+                    ]}
+                >
+                    <Input />
                 </Form.Item>
 
                 <Form.Item
@@ -130,12 +174,20 @@ export default class RegisterForm extends Component {
                     <Input />
                 </Form.Item>
 
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form__submit">
-                        Register
-                    </Button>
-                </Form.Item>
+                {
+                    this.state.isLoading
+                        ? <Spin />
+                        : (
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" className="form__submit">
+                                    Register
+                                </Button>
+                            </Form.Item>
+                        )
+                }
             </Form>
         )
     }
 }
+
+export default withRouter(RegisterForm)

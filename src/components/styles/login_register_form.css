@@ -16,7 +16,11 @@ form .ant-form-item:last-child {
     justify-content: center;
 }
 
-.login-form__submit {
+form .ant-spin {
+    width: 100%;
+}
+
+.form__submit {
     width: 100%;
     margin-top: 20px;
     border-radius: var(--border-radius);
