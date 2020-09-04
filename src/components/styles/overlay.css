@@ -1,0 +1,10 @@
+[class^="overlay"] {
+    background: rgba(0,0,0,0.8);
+    transition: all .5s ease;
+    opacity: 1;
+}
+
+.overlay--hide {
+    pointer-events: none;
+    opacity: 0;
+}

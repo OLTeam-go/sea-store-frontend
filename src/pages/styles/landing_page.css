@@ -1,0 +1,103 @@
+.landing-page {
+    width: 100%;
+    height: 100%;
+    background: url("https://miro.medium.com/max/5000/1*aiVyf6wDOALRLWJG9b82LA.png");
+    background-size: cover;
+    background-position: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-page__introduction-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 30% 0;
+    padding: 35px;
+    background: #fffffff0;
+}
+
+.landing-page__introduction-content--heading {
+    font-size: 3.5em;
+}
+
+.landing-page__introduction-content--paragraph {
+    font-size: 1.75em;
+}
+
+.landing-page__introduction-content--register,
+.landing-page__introduction-content--login {
+    font-size: 1.45em !important;
+    padding: var(--button-padding);
+    height: auto;
+    border-radius: var(--border-radius);
+    margin: 10px 0 10px 0;
+}
+
+.landing-page__introduction-content--register,
+.landing-page__introduction-content--register:hover,
+.landing-page__introduction-content--register:focus {
+    color: var(--primary-color);
+    background: white;
+    border: var(--primary-color) 1px solid;
+}
+
+.landing-page__introduction-content--login,
+.landing-page__introduction-content--login:focus,
+.landing-page__introduction-content--login:hover {
+    color: white;
+    background: var(--primary-color);
+    border: none;
+}
+
+.form--login,
+.form--register {
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    transition: all .5s ease;
+}
+
+.form--hide {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+[class^="overlay"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .landing-page {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-page__introduction-content {
+        flex-basis: 50%;
+        border-radius: var(--border-radius);
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .landing-page__introduction-content {
+        padding: 25px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .landing-page__introduction-content {
+        padding: 35px;
+    }
+}
