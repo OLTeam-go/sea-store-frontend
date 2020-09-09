@@ -1,0 +1,30 @@
+.merchant-page__info {
+    background: none;
+    padding: 50px 0px 0px 50px;
+    width: auto !important;
+    flex-basis: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+}
+
+.merchant-page__info__title {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.merchant-page__info__label {
+    display: block;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+@media only screen and (max-width: 992px) {
+    .merchant-page__content.ant-layout-has-sider {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .merchant-page__info {
+        padding: 50px;
+    }
+}

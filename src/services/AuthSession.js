@@ -7,7 +7,7 @@ class AuthSession {
         sessionStorage.removeItem("authenticatedUser")
     }
 
-    handleLogoutSucceeded() {
+    handleLogout() {
         sessionStorage.removeItem("authenticatedUser")
     }
 
@@ -19,6 +19,12 @@ class AuthSession {
         const authedUser = JSON.parse(sessionStorage.getItem("authenticatedUser"))
         if (!authedUser) return null
         else return authedUser.type
+    }
+
+    getUserId() {
+        const authedUser = JSON.parse(sessionStorage.getItem("authenticatedUser"))
+        if (!authedUser) return null
+        else return authedUser.id
     }
 }
 

@@ -24,11 +24,6 @@
     background: #1890ff;
 }
 
-.menu__item--image {
-    width: 30px;
-    height: 30px;
-}
-
 .ant-layout-content {
     padding: 50px;
     background: #fff;

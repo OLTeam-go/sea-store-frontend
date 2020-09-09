@@ -1,8 +1,4 @@
-.cart-page {
-    min-height: 100%;
-}
-
-.cart-page__fab {
+.add-product__fab {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -15,22 +11,13 @@
     border: none;
 }
 
-.cart-page__fab:focus,
-.cart-page__fab:active {
+.add-product__fab:focus,
+.add-product__fab:active {
     background: var(--primary-color);
     color: white;
 }
 
-.cart-page__fab:hover {
+.add-product__fab:hover {
     background: white;
     color: var(--primary-color);
-}
-
-.ant-modal-footer {
-    display: flex;
-    align-items: center;
-}
-
-.modal-footer--right-aligned {
-    margin-left: auto;
 }

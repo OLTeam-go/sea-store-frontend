@@ -15,6 +15,10 @@ h1 {
     background: #fff;
 }
 
+.home-page {
+    background: #fff;
+}
+
 .home-page__menu__item--last-child {
     margin-left: auto;
 }
@@ -26,4 +30,9 @@ h1 {
 
 .ant-btn {
     font-size: 1em;
+}
+
+.ant-spin {
+    width: 100%;
+    padding: 20px;
 }

@@ -141,8 +141,8 @@ class RegisterForm extends Component {
                 >
                     <Radio.Group 
                         options={[
-                            { label: "Male", value: "Male" },
-                            { label: "Female", value: "Female" }
+                            { label: "Male", value: "male" },
+                            { label: "Female", value: "female" }
                         ]}
                     />
                 </Form.Item>
@@ -171,7 +171,7 @@ class RegisterForm extends Component {
                     ]}
                     className={this.state.isLoggingAsAdmin ? "" : "hide"}
                 >
-                    <Input />
+                    <Input.Password />
                 </Form.Item>
 
                 {

@@ -1,10 +1,9 @@
 import React, { Component } from "react"
-import { Layout, Menu, Popconfirm, message } from "antd"
 import PropTypes from "prop-types"
 import { withRouter } from "react-router"
+import { Layout, Menu, Popconfirm, message } from "antd"
 
 import AuthSession from "../../services/AuthSession"
-import "./styles/header_component.css"
 
 const { Header } = Layout
 
@@ -14,27 +13,19 @@ class HeaderComponent extends Component {
     }
 
     handleHomeMenuClick() {
-        console.log("Home menu clicked")
-        this.props.history.push("/customer/home")
+        this.props.history.push("/merchant/home")
     }
 
     handleProfileMenuClick() {
-        console.log("Profile menu clicked")
-        this.props.history.push("/customer/profile")
+        this.props.history.push("/merchant/profile")
     }
 
-    handleOrderMenuClick() {
-        console.log("Order menu clicked")
-        this.props.history.push("/customer/order")
+    handleWalletMenuClick() {
+        this.props.history.push("/merchant/wallet")
     }
 
-    handleTransactionMenuClick() {
-        this.props.history.push("/customer/transaction")
-    }
-
-    handleCartMenuClick() {
-        console.log("Cart menu clicked")
-        this.props.history.push("/customer/cart")
+    handleRequestMenuClick() {
+        this.props.history.push("/merchant/request")
     }
 
     handleLogout() {
@@ -51,39 +42,30 @@ class HeaderComponent extends Component {
                 <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[`${this.props.defaultSelectedKeys}`]}>
                     <Menu.Item 
                         key="1"
-                        onClick={() => this.handleHomeMenuClick()}
+                        onClick={this.handleHomeMenuClick.bind(this)}
                     >
                         Home
                     </Menu.Item>
                     <Menu.Item 
                         key="2"
-                        onClick={() => this.handleProfileMenuClick()}
+                        onClick={this.handleProfileMenuClick.bind(this)}
                     >
                         Profile
                     </Menu.Item>
                     <Menu.Item 
                         key="3"
-                        onClick={() => this.handleOrderMenuClick()}
+                        onClick={this.handleWalletMenuClick.bind(this)}
                     >
-                        Order
+                        Wallet
                     </Menu.Item>
-
                     <Menu.Item
                         key="4"
-                        onClick={() => this.handleTransactionMenuClick()}
+                        onClick={this.handleRequestMenuClick.bind(this)}
                     >
-                        Transaction
+                        Request
                     </Menu.Item>
 
-                    <Menu.Item 
-                        key="5" 
-                        className="menu__item--right-margined"
-                        onClick={() => this.handleCartMenuClick()}
-                    >
-                        <img className="menu__item--image" src={process.env.PUBLIC_URL + "/images/cart.png"} alt="Cart" />
-                    </Menu.Item>
-
-                    <div className="menu__item--not-selectable">
+                    <div className="menu__item--right-margined menu__item--not-selectable">
                         <Popconfirm 
                             placement="bottomRight"
                             title="Are you sure you want to logout?"

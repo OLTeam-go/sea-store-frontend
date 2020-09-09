@@ -1,9 +1,10 @@
 import React, { Component } from "react"
-import { Layout, Modal, notification, Button } from "antd"
+import { Layout, Modal, notification, Button, message } from "antd"
 
 import HeaderComponent from "../../components/customer/HeaderComponent"
 import CartList from "../../components/customer/CartList"
 import "./styles/cart_page.css"
+import PaymentForm from "../../components/customer/PaymentForm"
 
 const { Content } = Layout
 
@@ -27,28 +28,53 @@ class CartPage extends Component {
                     quantity: 1
                 }
             ],
-            removeModal: {
+            removeItemModal: {
                 isVisible: false,
                 productId: null
+            },
+            payModal: {
+                isVisible: false
             }
         }
+        this.paymentModalRef = React.createRef()
     }
 
-    handleOpenModal(productId) {
+    handleOpenRemoveModal(productId) {
         this.setState({
-            removeModal: {
+            removeItemModal: {
                 isVisible: true,
                 productId: productId
             }
         })
     }
 
+    handleOpenPayModal() {
+        if (this.state.cart.length === 0) {
+            message.error("Your cart is empty")
+            return
+        }
+
+        this.setState({
+            payModal: {
+                isVisible: true
+            }
+        })
+    }
+
+    handleClosePayModal() {
+        this.setState({
+            payModal: {
+                isVisible: false
+            }
+        })
+    }
+
     handleRemoveFromCart() {
-        const productId = this.state.removeModal.productId
+        const productId = this.state.removeItemModal.productId
         let newCartState = this.state.cart.filter(product => product.id !== productId)
         this.setState({
             cart: newCartState,
-            removeModal: {
+            removeItemModal: {
                 isVisible: false,
                 productId: null
             }
@@ -59,39 +85,81 @@ class CartPage extends Component {
         })
     }
 
-    handleMakePayment() {
-        const totalProductPrice = this.state.cart.map(product =>
+    calculatePaymentAmount() {
+        if (this.state.cart.length === 0) 
+            return 0
+            
+        return this.state.cart.map(product =>
             product.price * product.quantity
         ).reduce((acc, price) =>
             acc + price
         )
-        
+    }
+
+    handleMakePayment() {
+        this.paymentModalRef.current
+            .validateFields()
+            .then(values => {
+                console.log(values)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+        const totalProductPrice = this.calculatePaymentAmount()
+        this.setState({
+            cart: [],
+            payModal: {
+                isVisible: false
+            }
+        })
+        notification.success({
+            message: "Payment succeeded",
+            duration: 1.5
+        })
         console.log(totalProductPrice)
     }
 
     render() {
+        const paymentModalFooter = [
+            <div key="paymentAmount">{`Total payment: $${this.calculatePaymentAmount()}`}</div>,
+            <Button className="modal-footer--right-aligned" key="back" onClick={() => this.handleClosePayModal()}>Cancel</Button>,
+            <Button key="submit" type="primary" onClick={() => this.handleMakePayment()}>Pay</Button>
+        ]
         return (
             <Layout className="cart-page">
-                <HeaderComponent defaultSelectedKeys={4} />
+                <HeaderComponent defaultSelectedKeys={5} />
+                <Modal
+                    title="Remove product from cart?"
+                    visible={this.state.removeItemModal.isVisible}
+                    centered
+                    onOk={() => this.handleRemoveFromCart()}
+                    onCancel={() => this.setState({ removeItemModal: { isVisible: false, productId: null }})}
+                >
+                    <p>This product will be removed from cart</p>
+                </Modal>
+                    
+                <Modal
+                    title="Pay for products"
+                    visible={this.state.payModal.isVisible}
+                    centered
+                    onOk={() => this.handleMakePayment()}
+                    onCancel={() => this.handleClosePayModal()}
+                    footer={paymentModalFooter}
+                >
+                    <PaymentForm reference={this.paymentModalRef}/>
+                </Modal>
+
                 <Content>
-                    <Modal
-                        title="Remove product from cart?"
-                        visible={this.state.removeModal.isVisible}
-                        centered
-                        onOk={() => this.handleRemoveFromCart()}
-                        onCancel={() => this.setState({ removeModal: { isVisible: false, productId: null }})}
-                    >
-                        <p>This product will be removed from cart</p>
-                    </Modal>
                     <h1>My Cart</h1>
                         <CartList 
                             cartList={this.state.cart} 
-                            onRemoveFromCart={(productId) => this.handleOpenModal(productId)}
+                            onRemoveFromCart={(productId) => this.handleOpenRemoveModal(productId)}
                         />
                 </Content>
                 <Button 
                     className="cart-page__fab"
-                    onClick={() => this.handleMakePayment()}
+                    onClick={() => this.handleOpenPayModal()}
                 > 
                     Make Payment
                 </Button>

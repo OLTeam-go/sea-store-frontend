@@ -23,7 +23,8 @@
 }
 
 .product-list__title div,
-.product-list__item div {
+.product-list__item div,
+.product-list__item a {
     display: flex;
     align-items: center;
     justify-content: center;

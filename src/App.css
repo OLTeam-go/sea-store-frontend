@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .App {
     width: 100vw;
     height: 100vh;
@@ -7,21 +11,52 @@
     --button-padding: 10px;
     --primary-color: #40a9ff;
     --primary-dark-color: #001529;
+    --green-color: #38c238;
 }
 
-button:hover {
+.ant-layout {
+    background: #fff;
+}
+
+.ant-btn:hover {
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+}
+
+.ant-btn-link:hover {
+    box-shadow: none;
+}
+
+.ant-card {
+    box-shadow: 1px 1px 4px 0px rgba(207,207,207,1);
+    border-radius: var(--border-radius);
+}
+
+.ant-table-content .ant-table-cell {
+    text-align: center;
+}
+
+.ant-table-content .ant-table-thead {
+    background: var(--primary-dark-color);
+}
+
+.ant-table-content .ant-table-thead .ant-table-cell {
+    background: none;
+    color: #ffffff;
+}
+
+.ant-table-content .ant-table-row:nth-child(2n) {
+    background: #f0f8ff;
 }
 
 @media only screen and (max-width: 600px) {
     #root {
-        font-size: 10px;
+        font-size: 11px;
     }
 }
 
 @media only screen and (min-width: 600px) {
     #root {
-        font-size: 10px;
+        font-size: 11px;
     }
 }
 
