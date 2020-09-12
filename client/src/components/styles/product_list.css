@@ -35,7 +35,7 @@
 }
 
 [class^="product-list"] :nth-child(1) {
-    flex-basis: 20%;
+    flex-basis: 18%;
 }
 
 [class^="product-list"] :nth-child(2) {
@@ -51,5 +51,9 @@
 }
 
 [class^="product-list"] :nth-child(5) {
+    flex-basis: 10%;
+}
+
+[class^="product-list"] :nth-child(6) {
     margin: 0 auto;
 }

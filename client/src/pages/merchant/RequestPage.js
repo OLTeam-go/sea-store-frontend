@@ -1,6 +1,10 @@
 import React, { Component } from "react"
 import { Layout, Table } from "antd"
+
 import HeaderComponent from "../../components/merchant/HeaderComponent"
+import TransactionApi from "../../apis/TransactionApi"
+import AuthSession from "../../services/AuthSession"
+import Formatter from "../../utilities/Formatter"
 
 const { Content } = Layout
 
@@ -18,48 +22,42 @@ export default class RequestPage extends Component {
     }
 
     handleGetRequestData() {
-        setTimeout(() => {
-            this.setState({
-                isLoading: false,
-                requestData: [
-                    {
-                        date: "Mon 25 Sep 2020",
-                        customer: "Michelle",
-                        product: "Laptop",
-                        quantity: 1
-                    },
-                    {
-                        date: "Tue 26 Sep 2020",
-                        customer: "Vincent",
-                        product: "Camera",
-                        quantity: 2
-                    }
-                ]
+        const merchantId = AuthSession.getUserId()
+        TransactionApi.handleGetMerchantRequest(merchantId)
+            .then(res => {
+                if (!res.data.data) return Promise.resolve([])
+                const newRequestData = res.data.data
+                this.setState({
+                    isLoading: false,
+                    requestData: newRequestData
+                })
             })
-        }, 2000)
+            .catch(err => {
+                console.error(err)
+            })
     }
 
     render() {
         const requestColumns = [
             {
                 title: "Order Date",
-                dataIndex: "date",
-                key: "date"
-            },
-            {
-                title: "Customer",
-                dataIndex: "customer",
-                key: "customer"
+                dataIndex: "update_at",
+                render: (text) => Formatter.formatDate(text)
             },
             {
                 title: "Product",
-                dataIndex: "product",
-                key: "product"
+                dataIndex: "name",
+                key: "name"
             },
             {
                 title: "Quantity",
                 dataIndex: "quantity",
                 key: "quantity"
+            },
+            {
+                title: "Transferred",
+                dataIndex: "price",
+                render: (text) => Formatter.formatCurrency(text)
             }
         ]
 
@@ -67,6 +65,7 @@ export default class RequestPage extends Component {
             <Layout>
                 <HeaderComponent defaultSelectedKeys={4} />
                 <Content>
+                    <h1>Order Requested</h1>
                     <Table 
                         columns={requestColumns} 
                         dataSource={this.state.requestData} 

@@ -1,0 +1,11 @@
+.transaction-page__table__status--red {
+    color: var(--red-color);
+}
+
+.transaction-page__table__status--green {
+    color: var(--green-color);
+}
+
+.transaction-page__table__status--grey {
+    color: var(--grey-color);
+}

@@ -6,6 +6,8 @@ import HeaderComponent from "../../components/customer/HeaderComponent"
 import "./styles/home_page.css"
 import ItemApi from "../../apis/ItemApi"
 import UserApi from "../../apis/UserApi"
+import AuthSession from "../../services/AuthSession"
+import TransactionApi from "../../apis/TransactionApi"
 
 const { Content } = Layout
 
@@ -32,7 +34,8 @@ class HomePage extends Component {
                         id: product.id,
                         name: product.name,
                         price: product.price,
-                        quantity: product.quantity
+                        quantity: product.quantity,
+                        category: product.category
                     })
                     return UserApi.handleGetUserInfo(product["merchant_id"])
                 })
@@ -54,16 +57,22 @@ class HomePage extends Component {
     } 
 
     handleAddToCart(productId) {
-        const productNewState = this.state.products.slice()
-        const targetProduct = productNewState.find(product => product.id === productId)
-        const targetProductName = targetProduct.name
-        targetProduct.quantity -= 1
-        this.setState(productNewState)
-        notification.success({
-            message: `Product has been added to cart`,
-            description: `Product with name "${targetProductName}" added`,
-            duration: 1.5
-        })
+        const customerId = AuthSession.getUserId()
+        const targetProductName = this.state.products.find(product => product.id === productId).name
+        TransactionApi.handleAddToCart(productId, customerId)
+            .then(res => {
+                notification.success({
+                    message: "Product added to cart",
+                    description: `One product with name ${targetProductName}`,
+                    duration: 1.5
+                })
+            })
+            .catch(err => {
+                notification.error({
+                    message: "Product add to cart failed",
+                    duration: 1.5
+                })
+            })
     }
 
     render() {

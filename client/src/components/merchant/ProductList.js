@@ -3,6 +3,7 @@ import { Table, Button, Popconfirm, Space, notification } from "antd"
 import EditProductForm from "./EditProductForm"
 import ItemApi from "../../apis/ItemApi"
 import Modal from "antd/lib/modal/Modal"
+import "./styles/product_list.css"
 
 export default class ProductList extends Component {
     constructor(props) {
@@ -101,7 +102,7 @@ export default class ProductList extends Component {
             {
                 title: "Quantity",
                 dataIndex: "quantity",
-                key: "quantity"
+                render: (text) => text === 0 ? <span className="product-list__quantity--zero">OUT OF STOCK</span> : text
             },
             {
                 title: "Category",

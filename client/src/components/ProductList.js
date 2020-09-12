@@ -32,6 +32,7 @@ class ProductList extends Component {
                         >
                             {product.merchantName}
                         </Button>
+                        <div>{product.category}</div>
                         <div>{product.price}</div>
                         <div>{product.quantity}</div>
                         <Button
@@ -49,6 +50,7 @@ class ProductList extends Component {
                 <li className="product-list__title">
                     <div>Product</div>
                     <div>Merchant</div>
+                    <div>Category</div>
                     <div>Price</div>
                     <div>Quantity</div>
                 </li>

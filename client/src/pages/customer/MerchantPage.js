@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Layout, Card, Table, Button } from "antd"
+import { Layout, Card, Table, Button, Spin } from "antd"
 
 import HeaderComponent from "../../components/customer/HeaderComponent"
 import UserApi from "../../apis/UserApi"
@@ -31,7 +31,7 @@ export default class MerchantPage extends Component {
             .then(merchantInfo => {
                 this.setState({
                     merchantInfo: merchantInfo.data,
-                    isLoadingMerchantProducts: false
+                    isLoadingMerchantInfo: false
                 })
             })
             .catch(err => console.error(err))
@@ -100,19 +100,27 @@ export default class MerchantPage extends Component {
                 <Layout className="merchant-page__content">
                     <Sider className="merchant-page__info">
                         <Card>
-                            <h1 className="merchant-page__info__title">Merchant Info</h1>
-                            <p>
-                                <span className="merchant-page__info__label">Username:</span>
-                                {this.state.merchantInfo.username}
-                            </p>
-                            <p>
-                                <span className="merchant-page__info__label">Name:</span>
-                                {this.state.merchantInfo.name}
-                            </p>
-                            <p>
-                                <span className="merchant-page__info__label">Email:</span>
-                                {this.state.merchantInfo.email}
-                            </p>
+                            {
+                                this.state.isLoadingMerchantInfo 
+                                    ? <Spin size="medium" />
+                                    : (
+                                        <div>
+                                            <h1 className="merchant-page__info__title">Merchant Info</h1>
+                                            <p>
+                                                <span className="merchant-page__info__label">Username:</span>
+                                                {this.state.merchantInfo.username}
+                                            </p>
+                                            <p>
+                                                <span className="merchant-page__info__label">Name:</span>
+                                                {this.state.merchantInfo.name}
+                                            </p>
+                                            <p>
+                                                <span className="merchant-page__info__label">Email:</span>
+                                                {this.state.merchantInfo.email}
+                                            </p>
+                                        </div>
+                                    )
+                            }
                         </Card>
                     </Sider>
                     <Content>

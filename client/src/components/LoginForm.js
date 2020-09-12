@@ -33,20 +33,22 @@ class LoginForm extends Component {
         AuthApi.handleLogin({
             username: value.username,
             password: value.password
-        }).then(res => {
-            this.setState({ isLoading: false })
-            const { type, username, id } = res.data
-            AuthSession.handleLoginSucceeded({ type, username, id })
-            this.props.history.push(`/${type}/home`)
-        }).catch(err => {
-            this.setState({ isLoading: false })
-            notification.error({
-                message: "Error logging in",
-                description: "There was an error in logging in",
-                duration: 2.5
-            })
-            console.log(err)
         })
+            .then(res => {
+                this.setState({ isLoading: false })
+                const { type, username, id } = res.data
+                AuthSession.handleLoginSucceeded({ type, username, id })
+                this.props.history.push(`/${type}/home`)
+            })
+            .catch(err => {
+                this.setState({ isLoading: false })
+                notification.error({
+                    message: "Error logging in",
+                    description: "There was an error in logging in",
+                    duration: 2.5
+                })
+                console.log(err)
+            })
     }
 
     render() {

@@ -28,6 +28,7 @@ class RegisterForm extends Component {
             isLoggingAsAdmin: false,
             isLoading: false
         }
+        this.formRef = React.createRef()
     }
 
     handleRegisterRequest(value) {
@@ -35,10 +36,17 @@ class RegisterForm extends Component {
         AuthApi.handleRegistration(value)
             .then(res => {
                 this.setState({ isLoading: false })
-                // Get data from db later for the userType and username
-                const { type, username, id } = res.data
-                AuthSession.handleLoginSucceeded({ type, username, id })
-                this.props.history.push(`/${type}/home`)
+                if (value.userType === "merchant") {
+                    notification.success({
+                        message: "Your registration request has been submitted"
+                    })                    
+                    this.formRef.current.resetFields()
+                }
+                else {
+                    const { type, username, id } = res.data
+                    AuthSession.handleLoginSucceeded({ type, username, id })
+                    this.props.history.push(`/${type}/home`)
+                }
             }).catch(err => {
                 this.setState({ isLoading: false })
                 notification.error({
@@ -65,6 +73,7 @@ class RegisterForm extends Component {
                 {...layout}
                 className={this.props.className}
                 onFinish={(value) => this.handleRegisterRequest(value)}
+                ref={this.formRef}
             >
                 <h1>Register</h1>
 

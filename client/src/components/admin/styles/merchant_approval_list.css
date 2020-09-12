@@ -20,7 +20,7 @@
 .list__card__desc--right-aligned {
     text-align: right;
     font-size: 0.9em;
-    color: #838383;
+    color: var(--grey-color);
 }
 
 .ant-card-actions > li {
@@ -33,7 +33,7 @@
 }
 
 .ant-card-actions > li:last-child:hover .anticon {
-    color: #ff1e1e;
+    color: var(--red-color);
 }
 
 .ant-card-actions .anticon {

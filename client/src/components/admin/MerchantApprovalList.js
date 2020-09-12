@@ -4,6 +4,7 @@ import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 
 import UserApi from "../../apis/UserApi"
 import "./styles/merchant_approval_list.css"
+import Formatter from "../../utilities/Formatter"
 
 export default class MerchantApprovalList extends Component {
     constructor(props) {
@@ -151,7 +152,7 @@ export default class MerchantApprovalList extends Component {
                                                 >
                                                     <p className="list__card__desc--right-aligned">
                                                         {
-                                                            (new Date(merchant.created_at.slice(0, -6))).toDateString()
+                                                            Formatter.formatDate(merchant.created_at)
                                                         }
                                                     </p>
                                                     <p>

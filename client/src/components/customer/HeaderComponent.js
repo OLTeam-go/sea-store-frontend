@@ -23,11 +23,6 @@ class HeaderComponent extends Component {
         this.props.history.push("/customer/profile")
     }
 
-    handleOrderMenuClick() {
-        console.log("Order menu clicked")
-        this.props.history.push("/customer/order")
-    }
-
     handleTransactionMenuClick() {
         this.props.history.push("/customer/transaction")
     }
@@ -61,22 +56,16 @@ class HeaderComponent extends Component {
                     >
                         Profile
                     </Menu.Item>
-                    <Menu.Item 
-                        key="3"
-                        onClick={() => this.handleOrderMenuClick()}
-                    >
-                        Order
-                    </Menu.Item>
 
                     <Menu.Item
-                        key="4"
+                        key="3"
                         onClick={() => this.handleTransactionMenuClick()}
                     >
                         Transaction
                     </Menu.Item>
 
                     <Menu.Item 
-                        key="5" 
+                        key="4" 
                         className="menu__item--right-margined"
                         onClick={() => this.handleCartMenuClick()}
                     >
