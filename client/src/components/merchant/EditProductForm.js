@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Form, Input, InputNumber, Spin } from "antd"
+import Formatter from "../../utilities/Formatter"
 
 const layout = {
     labelCol: {
@@ -59,8 +60,7 @@ export default class EditProductForm extends Component {
                         >
                             <InputNumber 
                                 min={0} 
-                                formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                formatter={value => Formatter.formatCurrency(value)}
                             />
                         </Form.Item>
 

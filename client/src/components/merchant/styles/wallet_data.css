@@ -1,0 +1,31 @@
+.wallet-data {
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.wallet-data__info {
+    font-size: 1.4em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.wallet-data__info__balance {
+    color: var(--green-color);
+    font-weight: bolder;
+}
+
+.wallet-data img {
+    width: 100px;
+    margin-right: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .wallet-data img {
+        width: 75px;
+        height: 75px;
+        margin-right: 25px;
+    }
+}

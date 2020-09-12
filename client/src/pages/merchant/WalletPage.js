@@ -3,6 +3,8 @@ import { Layout, Table } from "antd"
 import HeaderComponent from "../../components/merchant/HeaderComponent"
 
 import "./styles/wallet_page.css"
+import WalletData from "../../components/merchant/WalletData"
+import WalletApi from "../../apis/WalletApi"
 
 const { Content } = Layout
 
@@ -10,13 +12,15 @@ export default class WalletPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoading: true,
-            walletData: []
+            isLoading: true
         }
     }
 
     componentDidMount() {
         this.handleGetWalletData()
+        WalletApi.handleGetWalletHistories()
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
     }
 
     handleGetWalletData() {
@@ -67,6 +71,7 @@ export default class WalletPage extends Component {
             <Layout>
                 <HeaderComponent defaultSelectedKeys={3} />
                 <Content>
+                    <WalletData />
                     <Table 
                         className="wallet-page__table"
                         columns={walletColumns} 

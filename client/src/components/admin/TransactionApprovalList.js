@@ -66,7 +66,6 @@ export default class TransactionApprovalList extends Component {
                     isLoadingTransaction: false,
                     transactionData: newTransactionData
                 })
-                console.log(this.state.transactionData)
             })
             .catch(err => console.error(err))
     }
