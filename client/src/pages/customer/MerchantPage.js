@@ -6,6 +6,7 @@ import UserApi from "../../apis/UserApi"
 import ItemApi from "../../apis/ItemApi"
 
 import "./styles/merchant_page.css"
+import Formatter from "../../utilities/Formatter"
 
 const { Content, Sider } = Layout
 
@@ -40,8 +41,10 @@ export default class MerchantPage extends Component {
     handleGetMerchantProducts() {
         ItemApi.handleGetItemsByMerchant(this.state.merchantId)
             .then(merchantProducts => {
+                if (!merchantProducts.data.data) return Promise.resolve([])
+                const nonOutOfStockProducts = merchantProducts.data.data.filter(product => product.quantity !== 0)
                 this.setState({
-                    merchantProducts: merchantProducts.data.data,
+                    merchantProducts: nonOutOfStockProducts,
                     isLoadingMerchantProducts: false
                 })
             })
@@ -67,7 +70,7 @@ export default class MerchantPage extends Component {
             {
                 title: "Price",
                 dataIndex: "price",
-                key: "price"
+                render: (text) => Formatter.formatCurrency(text)
             },
             {
                 title: "Quantity",

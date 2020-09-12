@@ -4,6 +4,7 @@ import EditProductForm from "./EditProductForm"
 import ItemApi from "../../apis/ItemApi"
 import Modal from "antd/lib/modal/Modal"
 import "./styles/product_list.css"
+import Formatter from "../../utilities/Formatter"
 
 export default class ProductList extends Component {
     constructor(props) {
@@ -97,7 +98,7 @@ export default class ProductList extends Component {
             {
                 title: "Price",
                 dataIndex: "price",
-                key: "price"
+                render: (text) => Formatter.formatCurrency(text)
             },
             {
                 title: "Quantity",

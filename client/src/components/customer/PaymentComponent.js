@@ -3,6 +3,7 @@ import { Form, Input, Select, Spin, Button, message, notification } from "antd"
 import TransactionApi from "../../apis/TransactionApi"
 import Modal from "antd/lib/modal/Modal"
 import AuthSession from "../../services/AuthSession"
+import Formatter from "../../utilities/Formatter"
 
 const layout = {
     labelCol: {
@@ -99,14 +100,9 @@ export default class PaymentComponent extends Component {
             })
     }
 
-    render() {
-        const formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        })
-
+    render() {        
         const paymentModalFooter = [
-            <div key="paymentAmount">{`Total payment: ${formatter.format(this.calculatePaymentAmount())}`}</div>,
+            <div key="paymentAmount">{`Total payment: ${Formatter.formatCurrency(this.calculatePaymentAmount())}`}</div>,
             <Button className="modal-footer--right-aligned" key="back" onClick={() => this.handleClosePayModal()}>Cancel</Button>,
             <Button key="submit" type="primary" onClick={() => this.handleMakePayment()}>Pay</Button>
         ]

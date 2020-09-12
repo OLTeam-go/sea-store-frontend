@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Layout, notification, Spin } from "antd"
 
-import ProductList from "../../components/ProductList"
+import ProductList from "../../components/customer/ProductList"
 import HeaderComponent from "../../components/customer/HeaderComponent"
 import "./styles/home_page.css"
 import ItemApi from "../../apis/ItemApi"
