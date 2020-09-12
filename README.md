@@ -27,8 +27,6 @@ To run this app locally:
 
 - Run `npm install`
 
-- Run `npm run build`
-
 - Run `npm run start`
 
 - Go to `localhost:3000` on a browser
