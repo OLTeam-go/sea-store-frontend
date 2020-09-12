@@ -1,3 +1,7 @@
+# Badges
+
+[![pipeline status](https://gitlab.com/olteam-go/sea-store-backend-items/badges/master/pipeline.svg)](https://gitlab.com/olteam-go/sea-store-frontend/-/pipelines)
+
 
 # Simple Marketplace
 
