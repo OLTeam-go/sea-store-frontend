@@ -1,5 +1,5 @@
 class Formatter {
-    formatDate = (timestamp) => new Date(timestamp.slice(0, -6)).toDateString()
+    formatDate = (timestamp) => new Date(timestamp.slice(0, 19)).toDateString()
     
     formatCurrency = (number) => new Intl.NumberFormat('en-US', {
         style: 'currency',
