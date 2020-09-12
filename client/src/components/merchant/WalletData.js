@@ -49,7 +49,12 @@ export default class WalletData extends Component {
                         balance={this.state.walletData.balance} 
                         walletId={this.state.walletData.id}
                         onWithdrawing={() => this.setState({ isLoading: true })}
-                        onWithdraw={this.handleGetWalletData.bind(this)} />
+                        onWithdraw={() => {
+                                this.handleGetWalletData()
+                                this.props.onWithdraw()
+                            }
+                        }
+                    />
                 </div>
             </div>
         )

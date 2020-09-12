@@ -1,4 +1,7 @@
-.wallet-page__table .ant-table-tbody .ant-table-cell:nth-child(3) {
+.wallet-page__history__amount--debit {
+    color: var(--red-color);
+}
+
+.wallet-page__history__amount--credit {
     color: var(--green-color);
-    font-weight: bold;
 }

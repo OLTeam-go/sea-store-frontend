@@ -120,6 +120,7 @@ export default class TransactionPage extends Component {
             <Layout>
                 <HeaderComponent defaultSelectedKeys={3} />
                 <Content>
+                    <h1>Transaction History</h1>
                     <Table 
                         className="transaction-page__table"
                         columns={transactionColumns} 
