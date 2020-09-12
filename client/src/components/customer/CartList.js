@@ -5,6 +5,7 @@ import "./styles/cart_list.css"
 import TransactionApi from "../../apis/TransactionApi"
 import AuthSession from "../../services/AuthSession"
 import ItemApi from "../../apis/ItemApi"
+import Formatter from "../../utilities/Formatter"
 
 export default class CartList extends Component {
     constructor(props) {
@@ -82,11 +83,6 @@ export default class CartList extends Component {
     }
 
     render() {
-        const formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        })
-
         const cartColumns = [
             {
                 title: "Product",
@@ -101,7 +97,7 @@ export default class CartList extends Component {
             {
                 title: "Price",
                 dataIndex: "price",
-                render: (text, record) => formatter.format(text)
+                render: (text) => Formatter.formatCurrency(text)
             },
             {
                 title: "Quantity",

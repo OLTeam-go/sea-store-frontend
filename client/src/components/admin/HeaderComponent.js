@@ -39,13 +39,15 @@ class HeaderComponent extends Component {
 
                     <div className="menu__item--right-margined menu__item--not-selectable">
                         <Popconfirm 
-                            placement="bottomRight"
+                            placement="bottomLeft"
                             title="Are you sure you want to logout?"
                             onConfirm={() => this.handleLogout()}
                             okText="Yes"
                             cancelText="No"
                         >
-                            <img src={process.env.PUBLIC_URL + "/images/logout.png"} alt="Logout" />
+                            <div className="">
+                                <img src={process.env.PUBLIC_URL + "/images/logout.png"} alt="Logout" />
+                            </div>
                         </Popconfirm>
                     </div>
                 </Menu>

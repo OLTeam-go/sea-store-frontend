@@ -29,10 +29,10 @@ export default class TransactionApprovalList extends Component {
                 transactions.data.data.forEach(data => {
                     const essentialData = {
                         transactionId: data.id,
-                        date: Formatter.formatDate(data.created_at),
+                        date: data.created_at,
                         bankAccount: data.bank_account_number,
                         bankId: data.bank_id,
-                        total: Formatter.formatCurrency(data.cost),
+                        total: data.cost,
                         status: data.status,
                         cart: []
                     }
@@ -66,7 +66,6 @@ export default class TransactionApprovalList extends Component {
                     isLoadingTransaction: false,
                     transactionData: newTransactionData
                 })
-                console.log(this.state.transactionData)
             })
             .catch(err => console.error(err))
     }
@@ -112,7 +111,7 @@ export default class TransactionApprovalList extends Component {
             {
                 title: "Date",
                 dataIndex: "date",
-                key: "date"
+                render: (timestamp) => Formatter.formatDate(timestamp)
             },
             {
                 title: "Product",
@@ -128,7 +127,7 @@ export default class TransactionApprovalList extends Component {
             {
                 title: "Total",
                 dataIndex: "total",
-                key: "total"
+                render: (text) => Formatter.formatCurrency(text)
             },
             {
                 title: "From",

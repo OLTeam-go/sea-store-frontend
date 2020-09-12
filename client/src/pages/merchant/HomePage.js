@@ -78,6 +78,7 @@ export default class HomePage extends Component {
             <Layout className="home-page">
                 <HeaderComponent defaultSelectedKeys={1} />
                 <Content>
+                    <h1>Products For Sale</h1>
                     <AddProductComponent onAddProduct={this.handleGetItems.bind(this)} />
                     <ProductList 
                         list={this.state.productList} 

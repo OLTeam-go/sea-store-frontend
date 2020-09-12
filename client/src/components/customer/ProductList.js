@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 import { withRouter } from "react-router-dom"
 
 import "./styles/product_list.css"
+import Formatter from "../../utilities/Formatter"
 
 class ProductList extends Component {
     static propTypes = {
@@ -33,7 +34,7 @@ class ProductList extends Component {
                             {product.merchantName}
                         </Button>
                         <div>{product.category}</div>
-                        <div>{product.price}</div>
+                        <div>{Formatter.formatCurrency(product.price)}</div>
                         <div>{product.quantity}</div>
                         <Button
                             onClick={() => this.props.onAddToCart(product.id)}

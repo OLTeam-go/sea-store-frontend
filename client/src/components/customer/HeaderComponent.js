@@ -80,7 +80,9 @@ class HeaderComponent extends Component {
                             okText="Yes"
                             cancelText="No"
                         >
-                            <img src={process.env.PUBLIC_URL + "/images/logout.png"} alt="Logout" />
+                            <div>
+                                <img src={process.env.PUBLIC_URL + "/images/logout.png"} alt="Logout" />
+                            </div>
                         </Popconfirm>
                     </div>
                 </Menu>

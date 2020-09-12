@@ -31,10 +31,10 @@ export default class TransactionPage extends Component {
                 const itemPromises = []
                 transactions.data.data.forEach(data => {
                     const essentialData = {
-                        date: Formatter.formatDate(data.created_at),
+                        date: data.created_at,
                         bankAccount: data.bank_account_number,
                         bankId: data.bank_id,
-                        total: Formatter.formatCurrency(data.cost),
+                        total: data.cost,
                         status: data.status,
                         cart: []
                     }
@@ -78,7 +78,7 @@ export default class TransactionPage extends Component {
             {
                 title: "Date",
                 dataIndex: "date",
-                key: "date"
+                render: (timestamp) => Formatter.formatDate(timestamp)
             },
             {
                 title: "Products",
@@ -101,7 +101,7 @@ export default class TransactionPage extends Component {
             {
                 title: "Total",
                 dataIndex: "total",
-                key: "total"
+                render: (text) => Formatter.formatCurrency(text)
             },
             {
                 title: "Status",
@@ -120,6 +120,7 @@ export default class TransactionPage extends Component {
             <Layout>
                 <HeaderComponent defaultSelectedKeys={3} />
                 <Content>
+                    <h1>Transaction History</h1>
                     <Table 
                         className="transaction-page__table"
                         columns={transactionColumns} 
