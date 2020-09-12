@@ -1,0 +1,4 @@
+.wallet-page__table .ant-table-tbody .ant-table-cell:nth-child(3) {
+    color: var(--green-color);
+    font-weight: bold;
+}

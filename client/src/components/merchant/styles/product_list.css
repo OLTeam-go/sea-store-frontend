@@ -1,0 +1,3 @@
+.product-list__quantity--zero {
+    color: var(--red-color);
+}

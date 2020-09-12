@@ -1,0 +1,39 @@
+.ant-layout-header {
+    height: auto;
+}
+
+.ant-menu {
+    display: flex;
+}
+
+.menu__item--not-selectable {
+    height: auto;
+    background: transparent;
+    border: none;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.menu__item--not-selectable img {
+    width: 30px;
+    height: 30px;
+}
+
+.menu__item--not-selectable:hover {
+    background: #1890ff;
+}
+
+.menu__item--image {
+    width: 30px;
+    height: 30px;
+}
+
+.ant-layout-content {
+    padding: 50px;
+    background: #fff;
+}
+
+.menu__item--right-margined {
+    margin-left: auto;
+}

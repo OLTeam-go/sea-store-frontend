@@ -1,0 +1,23 @@
+.add-product__fab {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 50px;
+    padding: 1em 3em;
+    height: auto;
+    border-radius: 25px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.add-product__fab:focus,
+.add-product__fab:active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.add-product__fab:hover {
+    background: white;
+    color: var(--primary-color);
+}

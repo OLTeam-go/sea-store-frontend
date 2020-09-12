@@ -1,0 +1,38 @@
+h1 {
+    margin-bottom: 20px;
+}
+
+.ant-layout-header {
+    height: auto;
+}
+
+.ant-menu {
+    display: flex;
+}
+
+.ant-layout-content {
+    padding: 50px;
+    background: #fff;
+}
+
+.home-page {
+    background: #fff;
+}
+
+.home-page__menu__item--last-child {
+    margin-left: auto;
+}
+
+.home-page__menu__item--last-child img {
+    width: 30px;
+    height: 30px;
+}
+
+.ant-btn {
+    font-size: 1em;
+}
+
+.ant-spin {
+    width: 100%;
+    padding: 20px;
+}
