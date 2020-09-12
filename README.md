@@ -59,6 +59,11 @@ To register, a customer needs to choose the user type "Customer" and supply the 
 
 To add a product to cart, a customer can click on the "add to cart" button visible on the home page and the merchant profile page; both pages show a list of products. The list of products shows information related to the product for sale.
 
+
+### View Merchant's Profile
+
+To view a merchant's profile, a customer can click on the merchant's name on the home screen visible when they are selling a product. When the customer click on the merchant's name, the customer will be redirected to the merchant's profile screen where he/she can see all the products the merchant is selling.
+
   
 
 ### Update the Profile's Information
